@@ -8,14 +8,6 @@ import RedirectIfAuthenticated from "../features/auth/RedirectIfAuthenticated";
 
 const router = createBrowserRouter([
   {
-    path: "/login",
-    element: (
-      <RedirectIfAuthenticated>
-        <LoginPage />
-      </RedirectIfAuthenticated>
-    ),
-  },
-  {
     // ใช้ header ร่วมกัน ถ้าตามด้วย / เอา homepage  มาแทน Outlet
     path: "/",
     element: <Layout />,
@@ -24,6 +16,14 @@ const router = createBrowserRouter([
       { path: "friend", element: <FriendPage /> },
       { path: "profile/:profileId", element: <ProfilePage /> },
     ],
+  },
+  {
+    path: "/login",
+    element: (
+      <RedirectIfAuthenticated>
+        <LoginPage />
+      </RedirectIfAuthenticated>
+    ),
   },
 ]);
 

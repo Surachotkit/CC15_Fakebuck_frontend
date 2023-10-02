@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { createContext } from "react";
 import axios from "../config/axios";
-import { addAccessToken } from "../utils/local-storage";
+import { addAccessToken, getAccessToken} from "../utils/local-storage";
 import { useEffect } from "react";
 
 export const AuthContext = createContext();
@@ -9,14 +9,22 @@ export const AuthContext = createContext();
 export default function AuthContextProvider({ children }) {
   // ล็อคอินอยู่ไหม
   // {id:1 firstName: 'John', lastName: 'Doe', profileImage: ""}
-  const [authUser, setAuthUser] = useState(null);
+  const [authUser, setAuthUser] = useState(null); // { id, ... }
+  // ส่ง context ไปที่ App/
+  const [initialLoading, setInitailLoading] = useState(true)
 
-  // Modify header
+  // Modify header  หลังจากโหลดข้อมูลเสร็จ
   useEffect(() => {
-    axios.get("/auth/me").then(res => {
-        console.log(res.data)
-        setAuthUser(res.data.user)
-    })
+    if (getAccessToken()) {
+      axios.get('/auth/me').then(res => {
+        setAuthUser(res.data.user);
+      }).finally(() => {
+        setInitailLoading(false)
+      })
+      // ถ้าไม่มี token ให้ไม่ทำงาน loading
+    } else{
+      setInitailLoading(false)
+    }
   }, []);
 
   // submit form
@@ -32,7 +40,7 @@ export default function AuthContextProvider({ children }) {
   };
   return (
     // obj ที่มี key ชื่อ login
-    <AuthContext.Provider value={{ login, authUser }}>
+    <AuthContext.Provider value={{ login, authUser, initialLoading }}>
       {children}
     </AuthContext.Provider>
   );
