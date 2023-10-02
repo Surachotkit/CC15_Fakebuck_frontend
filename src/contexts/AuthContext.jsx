@@ -38,9 +38,16 @@ export default function AuthContextProvider({ children }) {
       console.log(err);
     }
   };
+
+  const register = async registerInputObject => {
+    const res = await axios.post('/auth/register', registerInputObject)
+    addAccessToken(res.data.accessToken);
+    setAuthUser(res.data.user)
+  }
+
   return (
     // obj ที่มี key ชื่อ login
-    <AuthContext.Provider value={{ login, authUser, initialLoading }}>
+    <AuthContext.Provider value={{ login, authUser, initialLoading, register }}>
       {children}
     </AuthContext.Provider>
   );
