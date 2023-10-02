@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { toast } from "react-toastify";
 import LoginButton from "./LoginButton";
 import LoginInput from "./LoginInput";
 import { useAuth } from "../../hooks/use-auth";
@@ -15,12 +16,10 @@ export default function LoginForm() {
   // ถ้ากด onsubmit จะมาทำงาน
   const handleSubmitForm = (e) => {
     e.preventDefault();
-    login(input)
-  };
-  // send req
-  // Localstorage.setItem('token')
-  // state => user
-
+    login(input).catch(err => {
+      toast.error(err.response.data.message)
+    })
+  }
   return (
     <form className="grid gap-4" onSubmit={handleSubmitForm}>
       <LoginInput
@@ -37,4 +36,10 @@ export default function LoginForm() {
       <LoginButton />
     </form>
   );
-}
+  }
+  // send req
+  // Localstorage.setItem('token')
+  // state => user
+
+
+

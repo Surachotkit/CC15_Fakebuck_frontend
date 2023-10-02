@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { toast } from "react-toastify";
 import RegisterInput from "./RegisterInput";
 import Joi from "joi";
 import InputErrorMessage from "./InputErrorMessage";
@@ -64,7 +65,10 @@ export default function RegisterForm() {
       return setError(validationError);
     }
     setError({});
-    register(input)
+    register(input).catch(err =>{
+        toast.error(err.response?.data.message)
+    })
+
   };
   return (
     <form

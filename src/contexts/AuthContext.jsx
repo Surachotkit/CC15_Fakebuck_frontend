@@ -29,14 +29,12 @@ export default function AuthContextProvider({ children }) {
 
   // submit form
   const login = async (credential) => {
-    try {
+    
       // backend ส่งมาเป็นอะไร -> accessToken, user
       const res = await axios.post("/auth/login", credential);
       addAccessToken(res.data.accessToken);
       setAuthUser(res.data.user);
-    } catch (err) {
-      console.log(err);
-    }
+
   };
 
   const register = async registerInputObject => {
