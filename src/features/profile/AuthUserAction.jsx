@@ -2,6 +2,7 @@ import { PenIcon } from "../../icon";
 import ActionButton from "./ActionButton";
 import Modal from "../../components/Modal";
 import { useState } from "react";
+import EditProfileForm from "./EditProfileForm";
 
 export default function AuthUserAction() {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,7 +17,9 @@ export default function AuthUserAction() {
         title="Edit Profile"
         onClose={() => setIsOpen(false)}
         maxWidth={44}
-      ></Modal>
+      >
+        <EditProfileForm/>
+      </Modal>
     </div>
   );
 }
