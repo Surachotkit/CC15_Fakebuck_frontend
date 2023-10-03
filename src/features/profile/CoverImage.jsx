@@ -1,4 +1,4 @@
-import defaultImage from '../../assets/img.jpg'
-export default function CoverImage() {
-  return <img src={defaultImage} alt="" />
+import defaultImage from "../../assets/img.jpg";
+export default function CoverImage({ src = defaultImage }) {
+  return <img src={src} alt="" />
 }
