@@ -8,12 +8,19 @@ export default function EditProfileForm() {
       <PictureForm title="Profile picture">
         {/* props children  */}
         {/* callback ให้ return เป็น Avatar */}
-        {(src) => <Avatar className="h-40" src={src} />}
+        {(src, onClick) => (
+          <div onClick={onClick}>
+            <Avatar className="h-40" src={src} />
+          </div>
+        )}
       </PictureForm>
 
       <PictureForm title="Cover photo">
-        {(src) => (
-          <div className="aspect-[3/1] overflow-hidden rounded-md items-center justify-center">
+        {(src, onClick) => (
+          <div
+            className="aspect-[3/1] overflow-hidden rounded-md items-center justify-center"
+            onClick={onClick}
+          >
             <CoverImage src={src} />
           </div>
         )}

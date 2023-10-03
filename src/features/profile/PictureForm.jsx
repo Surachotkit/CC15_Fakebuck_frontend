@@ -43,7 +43,9 @@ export default function PictureForm({ title, children }) {
       </div>
       {/* file มีค่าไหม ถ้ามีให้ convert ถ้าไม่มี null */}
       <div className="flex justify-center">
-        {children(file ? URL.createObjectURL(file) : undefined)}
+        {children(file ? URL.createObjectURL(file) : undefined, () =>
+          inputEl.current.click()
+        )}
       </div>
     </div>
   );
