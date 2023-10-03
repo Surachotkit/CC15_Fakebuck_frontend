@@ -1,5 +1,5 @@
 import Avatar from "../../components/Avatar";
-import { PenIcon } from "../../icon";
+import AuthUserAction from "./AuthUserAction";
 
 export default function ProfileInfo() {
   return (
@@ -22,11 +22,9 @@ export default function ProfileInfo() {
         </div>
       </div>
       <div>
-        <button className="bg-gray-200 px-3 py-2 rounded-lg font-semibold hover:bg-gray-300 flex gap-2 items-center">
-          <PenIcon />
-          <span>Edit Profile</span>
-        </button>
+        <AuthUserAction/>
       </div>
+
     </div>
   );
 }
