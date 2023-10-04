@@ -1,5 +1,9 @@
 import Avatar from "../../components/Avatar";
 import AuthUserAction from "./AuthUserAction";
+import FriendAction from "./FrinedAction";
+import ReceiverAction from "./ReceiverAction";
+import RequesterAction from "./RequesterAction";
+import UnknowAction from "./UnknowAction";
 
 export default function ProfileInfo({ profileUser }) {
   return (
@@ -27,7 +31,11 @@ export default function ProfileInfo({ profileUser }) {
         </div>
       </div>
       <div>
-        <AuthUserAction />
+        <ReceiverAction/>
+        {/* <RequesterAction/> */}
+        {/* <FriendAction/> */}
+        {/* <UnknowAction/> */}
+        {/* <AuthUserAction /> */}
       </div>
     </div>
   );
