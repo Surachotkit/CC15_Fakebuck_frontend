@@ -2,8 +2,12 @@ import { useRef } from "react";
 import Avatar from "../../components/Avatar";
 import FormButton from "./FormButton";
 import { useState } from "react";
+import axios from "axios";
 
-export default function PictureForm({ title, children }) {
+
+export default function PictureForm({ title, children, initialSrc, onSave }) {
+ 
+
   //เก็บรูป ที่ user เลือกใช้
   const [file, setFile] = useState(null);
   if (file) console.log(URL.createObjectURL(file));
@@ -26,7 +30,7 @@ export default function PictureForm({ title, children }) {
         <div>
           {file && (
             <>
-              <FormButton>Save</FormButton>
+              <FormButton onClick={() => onSave(file)}>Save</FormButton>
               {/* กด cancel */}
               <FormButton
                 onClick={() => {
@@ -43,7 +47,7 @@ export default function PictureForm({ title, children }) {
       </div>
       {/* file มีค่าไหม ถ้ามีให้ convert ถ้าไม่มี null */}
       <div className="flex justify-center">
-        {children(file ? URL.createObjectURL(file) : undefined, () =>
+        {children(file ? URL.createObjectURL(file) : initialSrc, () =>
           inputEl.current.click()
         )}
       </div>
